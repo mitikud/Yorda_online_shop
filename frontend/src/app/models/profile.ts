@@ -6,10 +6,10 @@ export class Profile {
   firstname: string | undefined;
   lastname: string | undefined;
   email: string | undefined;
-  address: string | undefined;
+  address!: string;
   city: string | undefined;
   country: string | undefined;
   phone: string | undefined;
-  cartId: number | undefined;
+  cartId!: number;
 
 }

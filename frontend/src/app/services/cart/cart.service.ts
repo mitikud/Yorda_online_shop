@@ -56,24 +56,24 @@ export class CartService {
       )
   }
 
-    // checkOut(cartItemId: number, createOrderDto: any): Observable<void>{
+    checkOut(cartItemId: number, createOrderDto: any): Observable<void>{
       
-    //     const ocheckOutUrl = `${this._cartItemUrl}/${cartItemId}/checkOut`;
-    //     return this.http.post<void>(ocheckOutUrl, createOrderDto).pipe(
-    //       catchError((error: any)=>{
-    //         return throwError(this.errorHandler.handleError(error))
-    //       })
-    //     )
-    // }
+        const ocheckOutUrl = `${this._cartItemUrl}/${cartItemId}/checkOut`;
+        return this.http.post<void>(ocheckOutUrl, createOrderDto).pipe(
+          catchError((error: any)=>{
+            return throwError(this.errorHandler.handleError(error))
+          })
+        )
+    }
 
-    // removeFromProduct(cartItemId: number, productId: number): Observable<CartItem>{
+    removeFromProduct(cartItemId: number, productId: number): Observable<CartItem>{
     
-    //     const removeUrl = `${this._cartItemUrl}/${cartItemId}/products/${productId}/remove-from-cart`
-    //     return this.http.delete<CartItem>(removeUrl).pipe(
-    //       catchError((error: any)=>{
-    //         return throwError(this.errorHandler.handleError(error))
-    //       })
-    //     )
+        const removeUrl = `${this._cartItemUrl}/${cartItemId}/products/${productId}/remove-from-cart`
+        return this.http.delete<CartItem>(removeUrl).pipe(
+          catchError((error: any)=>{
+            return throwError(this.errorHandler.handleError(error))
+          })
+        )
       
-    // }
+    }
 }

@@ -96,14 +96,14 @@ export class AuthService {
       )
   }
 
-  // messageContact(messageForm: any): Observable<void> {
+  messageContact(messageForm: any): Observable<void> {
     
-  //     return this.http.post<void>(this.contactUrl, messageForm).pipe(
-  //       catchError((error: any)=>{
-  //         return throwError(this.errorHandler.handleError(error))
-  //       })
-  //     )
-  // }
+      return this.http.post<void>(this.contactUrl, messageForm).pipe(
+        catchError((error: any)=>{
+          return throwError(this.errorHandler.handleError(error))
+        })
+      )
+  }
 
   getCurrentUser(): Observable<any> {
     
@@ -114,14 +114,14 @@ export class AuthService {
       )
   }
 
-  // getSystemUsers(): Observable<User[]> {
+  getSystemUsers(): Observable<User[]> {
    
-  //     return this.http.get<User[]>(this._userUrl).pipe(
-  //       catchError((error: any)=>{
-  //         return throwError(this.errorHandler.handleError(error))
-  //       })
-  //     )
-  // }
+      return this.http.get<User[]>(this._userUrl).pipe(
+        catchError((error: any)=>{
+          return throwError(this.errorHandler.handleError(error))
+        })
+      )
+  }
 
   // getToken() {
   //   return localStorage.getItem('token');

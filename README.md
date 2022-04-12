@@ -1,4 +1,10 @@
 # Yorda_online_shop
 
 Name of Members:
-Ghidiom Nughusse 
+  Mitiku Kiflemariam, 
+  Ghidiom Nughusse, 
+  Aboneh Manyazewal, 
+  Yafet Weldegabir, 
+  Yordanose Ogeto 
+  
+

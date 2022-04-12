@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { Cart } from 'src/app/models/cart';
-import { CartItem } from 'src/app/models/cart-item';
 import { ErrorHandler } from 'src/app/shared/error-handler';
 import { catchError, retry } from 'rxjs/operators';
 import { Category } from 'src/app/models/category';

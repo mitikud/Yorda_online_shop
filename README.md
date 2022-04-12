@@ -5,6 +5,6 @@ Name of Members:
   Ghidiom Nughusse, 
   Aboneh Manyazewal, 
   Yafet Weldegabir, 
-  Yordanose Ogeto, 
+  Yordanose Ogeto 
   
 

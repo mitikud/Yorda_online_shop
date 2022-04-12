@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
+//import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 import { ManageCategiriesComponent } from './admin/components/manage-categiries/manage-categiries.component';
 import { ManageOrdersComponent } from './admin/components/manage-orders/manage-orders.component';
 import { ManageUsersComponent } from './admin/components/manage-users/manage-users.component';
@@ -39,11 +39,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './services/auth/auth.service';
 import { TokenInterceptorService } from './services/auth/token-interceptor.service';
 import { ErrorInterceptorService } from './services/auth/error-interceptor.service';
+import { ProfileComponent } from './components/profile/profile.component';
+import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
     HomeComponent,
     LoginComponent,
     RegisterComponent,
@@ -58,7 +60,8 @@ import { ErrorInterceptorService } from './services/auth/error-interceptor.servi
     AlertComponent,
     ApplicationErrorComponent,
     PageNotFoundComponent,
-    ResourceNotFoundComponent
+    ResourceNotFoundComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

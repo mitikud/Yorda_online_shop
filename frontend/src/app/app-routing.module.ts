@@ -28,9 +28,9 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
-    resolve: {
-      profile: ProfileResolverService
-    },
+    // resolve: {
+    //   profile: ProfileResolverService
+    // },
     canActivate: [UserAuthGuard]
   },
   {
@@ -41,9 +41,9 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent,
-    resolve: {
-      cart: CartResolverService
-    },
+    // resolve: {
+    //   cart: CartResolverService
+    // },
     canActivate: [UserAuthGuard]
   },
   {
@@ -62,9 +62,9 @@ const routes: Routes = [
   {
     path: 'products',
     component: ProductListComponent,
-    resolve: {
-      products: ProductResolverService
-    }
+    // resolve: {
+    //   products: ProductResolverService
+    // }
   },
   {
     path: 'products/:id',
@@ -73,9 +73,9 @@ const routes: Routes = [
   {
     path: 'categories',
     component: CategoryListComponent,
-    resolve: {
-      categories: CategoryResolverService
-    }
+    // resolve: {
+    //   categories: CategoryResolverService
+    // }
   },
   {
     path: 'categories/:id',

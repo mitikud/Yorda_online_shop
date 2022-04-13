@@ -26,17 +26,17 @@ const routes: Routes = [
           {
             path: 'manage-categories',
             component: ManageCategiriesComponent,
-            resolve: {
-              categories: CategoryResolverService
-            },
+            // resolve: {
+            //   categories: CategoryResolverService
+            // },
             canActivate: [UserAuthGuard]
           },
           {
             path: 'manage-users',
             component: ManageUsersComponent,
-            resolve: {
-              allUsers: UserResolverService
-            },
+            // resolve: {
+            //   allUsers: UserResolverService
+            // },
             canActivate: [UserAuthGuard]
           },
         ]

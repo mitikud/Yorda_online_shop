@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Cart } from '../models/cart';
 import { AuthService } from '../services/auth/auth.service';
 import { CartService } from '../services/cart/cart.service';
+import { ErrorHandler } from 'src/app/shared/error-handler';
+import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ import { CartService } from '../services/cart/cart.service';
 export class CartResolverService implements Resolve<Cart>{
 
   constructor(private cartService: CartService, private authService: AuthService) { }
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Cart>{
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Cart> | any{
     if(this.authService.profile){
       return this.cartService.getCart(this.authService.profile.cartId);
     }

@@ -6,15 +6,19 @@ import { ManageCategiriesComponent } from './components/manage-categiries/manage
 import { ManageUsersComponent } from './components/manage-users/manage-users.component';
 import { Router } from 'express';
 import { CategoryResolverService } from '../resolvers/category-resolver.service';
+import { UserAuthGuard } from '../guards/user-auth.guard';
+import { UserResolverService } from '../resolvers/user-resolver.service';
 
 
 const routes: Routes = [
   {
     path: '',
+    canActivate: [UserAuthGuard],
     children: [
       {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [UserAuthGuard]
       },
       {
         path: 'management',
@@ -22,13 +26,18 @@ const routes: Routes = [
           {
             path: 'manage-categories',
             component: ManageCategiriesComponent,
-            // resolve: {
-            //   categories: CategoryResolverService
-            // }
+            resolve: {
+              categories: CategoryResolverService
+            },
+            canActivate: [UserAuthGuard]
           },
           {
             path: 'manage-users',
-            component: ManageUsersComponent
+            component: ManageUsersComponent,
+            resolve: {
+              allUsers: UserResolverService
+            },
+            canActivate: [UserAuthGuard]
           },
         ]
       },

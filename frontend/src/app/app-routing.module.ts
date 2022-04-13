@@ -10,6 +10,8 @@ import { OrderComponent } from './components/order/order.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { UserAuthGuard } from './guards/user-auth.guard';
+import { CartResolverService } from './resolvers/cart-resolver.service';
 //import { CartResolverService } from './resolvers/cart-resolver.service';
 import { CategoryResolverService } from './resolvers/category-resolver.service';
 import { ProductResolverService } from './resolvers/product-resolver.service';
@@ -26,20 +28,23 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
-    // resolve: {
-    //   profile: ProfileResolverService
-    // }
+    resolve: {
+      profile: ProfileResolverService
+    },
+    canActivate: [UserAuthGuard]
   },
   {
     path: 'orders',
     component: OrderComponent,
+    canActivate: [UserAuthGuard]
   },
   {
     path: 'cart',
     component: CartComponent,
-    // resolve: {
-    //   cart: CartResolverService
-    // }
+    resolve: {
+      cart: CartResolverService
+    },
+    canActivate: [UserAuthGuard]
   },
   {
     path: 'auth',
@@ -57,9 +62,9 @@ const routes: Routes = [
   {
     path: 'products',
     component: ProductListComponent,
-    // resolve: {
-    //   products: ProductResolverService
-    // }
+    resolve: {
+      products: ProductResolverService
+    }
   },
   {
     path: 'products/:id',
@@ -68,9 +73,9 @@ const routes: Routes = [
   {
     path: 'categories',
     component: CategoryListComponent,
-    // resolve: {
-    //   categories: CategoryResolverService
-    // }
+    resolve: {
+      categories: CategoryResolverService
+    }
   },
   {
     path: 'categories/:id',
@@ -83,6 +88,7 @@ const routes: Routes = [
   },
   {
     path: 'admin', // this is the prifix route
+    canActivate: [UserAuthGuard],
     // lazy loading: this module will not loaded unless the user navigate into it
     loadChildren: () => import('./admin/admin.module').then(a => a.AdminModule)
   },

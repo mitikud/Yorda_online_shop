@@ -62,7 +62,8 @@
     <mat-sidenav #sidenav mode="side" opened class="example-sidenav justify-content-center text-center"
                  [fixedInViewport]="false"
     >
-   
+      <!-- child and parent component-->
+      <app-category-list [inputCategories]="categories"></app-category-list>
     </mat-sidenav>
 
     <mat-sidenav-content>

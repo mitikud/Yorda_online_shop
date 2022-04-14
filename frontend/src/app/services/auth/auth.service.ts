@@ -15,6 +15,9 @@ import { ErrorHandler } from 'src/app/shared/error-handler';
   providedIn: 'root'
 })
 export class AuthService {
+  changeProfileImage(formData: FormData) {
+    throw new Error('Method not implemented.');
+  }
   getToken() {
     throw new Error('Method not implemented.');
   }
@@ -37,6 +40,8 @@ export class AuthService {
   public cartItem: CartItem | undefined;
   public profile: Profile | undefined ;
   public currentUser: User | undefined;
+  public isAdmin: User | undefined
+  
 
   register(data: any): Observable<any>{
   
@@ -75,6 +80,16 @@ export class AuthService {
   userLogout() {
     localStorage.removeItem('token');
     this.router.navigate(['/home']);
+  }
+
+  updateProfile(updateForm : any): Observable<Profile>{
+    return this.http.put<Profile>(
+      `${this._profileUrl}/userprofile/edit`, updateForm
+    ).pipe(
+      catchError((error: any)=>{
+        return throwError(this.errorHandler.handleError(error))
+      })
+    )
   }
 
   

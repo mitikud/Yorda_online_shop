@@ -8,17 +8,18 @@ import { Router } from 'express';
 import { CategoryResolverService } from '../resolvers/category-resolver.service';
 import { UserAuthGuard } from '../guards/user-auth.guard';
 import { UserResolverService } from '../resolvers/user-resolver.service';
+import { AdminAuthGuard } from '../guards/admin-auth.guard';
 
 
 const routes: Routes = [
   {
     path: '',
-    canActivate: [UserAuthGuard],
+    canActivate: [AdminAuthGuard],
     children: [
       {
         path: 'dashboard',
         component: DashboardComponent,
-        canActivate: [UserAuthGuard]
+        canActivate: [AdminAuthGuard]
       },
       {
         path: 'management',
@@ -29,7 +30,7 @@ const routes: Routes = [
             // resolve: {
             //   categories: CategoryResolverService
             // },
-            canActivate: [UserAuthGuard]
+            canActivate: [AdminAuthGuard]
           },
           {
             path: 'manage-users',
@@ -37,7 +38,7 @@ const routes: Routes = [
             // resolve: {
             //   allUsers: UserResolverService
             // },
-            canActivate: [UserAuthGuard]
+            canActivate: [AdminAuthGuard]
           },
         ]
       },

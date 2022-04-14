@@ -14,9 +14,9 @@
       
 </div>
     
-
+    <!--*ngIf="!authService.isLoggedIn()"  put in register-->
     <div class="col-md-5 justify-content-end">
-      <a *ngIf="!authService.isLoggedIn()" mat-button routerLink="/auth/login" routerLinkActive="Active">Login</a>
+      <a  mat-button routerLink="/auth/login" routerLinkActive="Active">Login</a>
     <!-- <a mat-button>Logout</a> -->
     <a *ngIf="!authService.isLoggedIn()" mat-button routerLink="/auth/register" routerLinkActive="Active">Register</a>
     <a mat-button *ngIf="authService.isLoggedIn() && (authService.getCurrentUser() && authService.isAdmin)" [matMenuTriggerFor]="managementMenu">Management</a>

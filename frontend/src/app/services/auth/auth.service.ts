@@ -7,6 +7,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { Cart } from 'src/app/models/cart';
 import { CartItem } from 'src/app/models/cart-item';
 import { Profile } from 'src/app/models/profile';
+import { register } from 'src/app/models/register';
 import { User } from 'src/app/models/user';
 import { UserData } from 'src/app/models/user-data';
 import { ErrorHandler } from 'src/app/shared/error-handler';
@@ -24,7 +25,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router, private route:ActivatedRoute) { }
 
-  _registerUrl = `http://localhost:3000/auth/register`;
+  registerUrl = `http://localhost:9090/api/auth`;
   _loginUrl = `http://localhost:3000/auth/login`;
   _userUrl = `http://localhost:3000/auth/current-user`;
   _profileUrl = `http://localhost:3000/profile`;
@@ -43,13 +44,20 @@ export class AuthService {
   public isAdmin: User | undefined
   
 
-  register(data: any): Observable<any>{
+  // register(data: any): Observable<any>{
   
-      return this.http.post<any>(this._registerUrl, data).pipe(
-        catchError((error: any)=>{
-          return throwError(this.errorHandler.handleError(error))
-        })
-      )
+  //     return this.http.post<any>(this._registerUrl, data).pipe(
+  //       catchError((error: any)=>{
+  //         return throwError(this.errorHandler.handleError(error))
+  //       })
+  //     )
+  // }
+
+  // createProduct(Product: Product): Observable<Object> {
+  //   return this.httpClient.post(${this.baseUrl}, Product);
+  register(data: register): Observable<Object>{
+  
+      return this.http.post(`${this.registerUrl}` + "/signup", data)
   }
 
   pUserData() {

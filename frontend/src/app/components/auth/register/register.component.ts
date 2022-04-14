@@ -48,6 +48,7 @@ export class RegisterComponent implements OnInit {
         country: new FormControl(null, Validators.required),
         city: new FormControl(null, Validators.required),
         address: new FormControl(null, Validators.required),
+        //roles: new FormControl(null, Validators.required),
       })
     });
   }

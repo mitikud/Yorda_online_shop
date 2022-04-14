@@ -14,19 +14,19 @@ export class AppComponent implements OnInit{
   inputCategories!: Category[];
   constructor(public authService: AuthService, private categoryService: CategoryService){
     authService.prepareUserData();
-    this.prepareCategories();
+    //this.prepareCategories();
   }
 
-  prepareCategories(){
-    this.categoryService.getCategories()
-    .subscribe(resData => {
-      this.categories = resData;
-    })
-  }
+  // prepareCategories(){
+  //   this.categoryService.getCategories()
+  //   .subscribe(resData => {
+  //     this.categories = resData;
+  //   })
+  // }
 
   ngOnInit(): void {
     this.authService.prepareUserData();
-    this.prepareCategories();
+    //this.prepareCategories();
 
   }
 }

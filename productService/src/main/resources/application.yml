@@ -1,0 +1,11 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: Product Microservice
+  data:
+    mongodb:
+      port: 27017
+      host: localhost
+      database: onlineShop
+

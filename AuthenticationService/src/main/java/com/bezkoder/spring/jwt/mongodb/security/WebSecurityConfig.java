@@ -1,5 +1,7 @@
 package com.bezkoder.spring.jwt.mongodb.security;
 
+import com.bezkoder.spring.jwt.mongodb.security.services.UserDetailsForToken;
+import com.bezkoder.spring.jwt.mongodb.security.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +18,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.bezkoder.spring.jwt.mongodb.security.jwt.AuthEntryPointJwt;
 import com.bezkoder.spring.jwt.mongodb.security.jwt.AuthTokenFilter;
-import com.bezkoder.spring.jwt.mongodb.security.services.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -26,7 +27,7 @@ import com.bezkoder.spring.jwt.mongodb.security.services.UserDetailsServiceImpl;
         prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    UserDetailsForToken userDetailsForToken;
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
@@ -38,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        authenticationManagerBuilder.userDetailsService(userDetailsForToken).passwordEncoder(passwordEncoder());
     }
 
     @Bean

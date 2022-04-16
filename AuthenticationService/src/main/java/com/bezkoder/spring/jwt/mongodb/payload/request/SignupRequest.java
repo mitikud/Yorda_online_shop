@@ -1,10 +1,10 @@
 package com.bezkoder.spring.jwt.mongodb.payload.request;
 
+import com.bezkoder.spring.jwt.mongodb.models.ERole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
 
 import javax.validation.constraints.*;
  @Data
@@ -25,9 +25,7 @@ public class SignupRequest {
     @Size(max = 50)
     @Email
     private String email;
-    
-    private Set<String> roles;
-    
+    private ERole roles;
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;

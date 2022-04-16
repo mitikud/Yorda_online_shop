@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -34,5 +36,7 @@ public class Vendor {
     @NotBlank
     @Size(max = 20)
     private String password;
+
+    List<Product> productList=new ArrayList<>();
 
 }

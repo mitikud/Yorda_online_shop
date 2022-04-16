@@ -1,6 +1,4 @@
 package com.bezkoder.spring.jwt.mongodb.security.services;
-
-import com.bezkoder.spring.jwt.mongodb.models.ERole;
 import com.bezkoder.spring.jwt.mongodb.models.Role;
 import com.bezkoder.spring.jwt.mongodb.models.User;
 import com.bezkoder.spring.jwt.mongodb.payload.request.LoginRequest;
@@ -20,9 +18,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +41,6 @@ public class UserService  {
     private KafkaTemplate<String, String> kafkaTemplate;
     @Autowired
     ObjectMapper objectMapper;
-
     public ResponseEntity<?> addUser(SignupRequest signUpRequest)  {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
@@ -80,7 +74,6 @@ public class UserService  {
                 user.getUsername(),
                 user.getEmail()
         );
-
         try {
             kafkaTemplate.send(vendorRegistered,objectMapper.writeValueAsString(kafkaMessage));
         } catch (JsonProcessingException e) {
@@ -90,9 +83,7 @@ public class UserService  {
                     .body(new MessageResponse("Error: Parsing error!"));
         }
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-        
     }
-
     public ResponseEntity<?> authenticateUser(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));

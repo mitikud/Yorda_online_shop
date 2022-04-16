@@ -4,7 +4,10 @@ import com.example.vendormodule.dto.VendorDto;
 import com.example.vendormodule.dto.VendorDtoAdaptor;
 import com.example.vendormodule.model.Vendor;
 import com.example.vendormodule.repository.VendorRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,6 +18,9 @@ import java.util.List;
 public class VendorServiceImpl implements VendorService {
     @Autowired
     private VendorRepository vendorRepository;
+    @Autowired
+    private ObjectMapper objectMapper;
+
 
     @Override
     public VendorDto register(VendorDto vendor) {
@@ -22,6 +28,15 @@ public class VendorServiceImpl implements VendorService {
         vendorRepository.save(vendor1);
         VendorDto vendorDto=VendorDtoAdaptor.vendorToVendorDTO(vendor1);
         return vendorDto;
+    }
+
+    @KafkaListener(topics = "vendorRegistered", groupId ="1")
+    public void listen(String vendorData) {
+        Gson g = new Gson();
+        System.out.println("Vendor Data: "+vendorData);
+        VendorDto vendorDto = g.fromJson(vendorData, VendorDto.class);
+        register(vendorDto);
+        System.out.println("Received Message in group -id 1 : " + vendorData);
     }
 
     @Override

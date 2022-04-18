@@ -18,12 +18,13 @@ import java.util.List;
 @RequestMapping("/api/v1/cart")
 public class ShoppingCartController {
 
+    @Autowired
     private ShoppingCartServiceImplemntation cartService;
 
-    @Autowired
-    public ShoppingCartController(ShoppingCartServiceImplemntation cartService) {
-        this.cartService = cartService;
-    }
+//    @Autowired
+//    public ShoppingCartController(ShoppingCartServiceImplemntation cartService) {
+//        this.cartService = cartService;
+//    }
 
     @PostMapping(value = "/create")
     private ResponseEntity create(@RequestBody CartRequest cartRequest) {

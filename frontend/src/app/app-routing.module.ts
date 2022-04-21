@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { CartComponent } from './components/cart/cart.component';
 import { HomeComponent } from './components/home/home.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductComponent } from './components/product/product.component';
-import { SpecialProductComponent } from './components/special-product/special-product.component';
 import { UserAuthGuard } from './guards/user-auth.guard';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 
@@ -14,13 +16,21 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'product',
+    path: 'products',
     component: ProductComponent
   },
+  {path: 'category/:id', 
+  component: ProductListComponent},
+  {path: 'category',
+   component: ProductListComponent},
+  
   {
-    path: 'special',
-    component: SpecialProductComponent,
-    canActivate: [UserAuthGuard]
+    path: 'cart',
+    component: CartComponent
+  },
+  {
+    path : 'admin',
+    component: DashboardComponent
   },
   {
     path: 'auth',
@@ -37,7 +47,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'products',
     pathMatch: 'full'
   },
   {

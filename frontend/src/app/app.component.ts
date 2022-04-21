@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth/auth.service';
+import { CartService } from './services/cart.service';
+import { SearchService } from './services/search.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,9 @@ import { AuthService } from './services/auth/auth.service';
 export class AppComponent {
   title = 'e-commerce';
 
-  constructor(public _authService: AuthService){
+  constructor(public _authService: AuthService, 
+              public _searchSearvice: SearchService,
+              public _cartService: CartService){
 
   }
 }

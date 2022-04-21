@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/services/product.service';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from 'src/app/models/product';
+import { CartService } from 'src/app/services/cart.service';
+import { ProductService } from "src/app/services/productm.service";
 
 @Component({
   selector: 'app-product',
@@ -8,16 +11,33 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductComponent implements OnInit {
 
-  products : any= []
+  allproducts!: Product[];
+  searchKey: string = "";
+  //currentCategoryId!: number;
 
-  constructor (private _productService: ProductService) { }
+  constructor(private productService: ProductService, private route: ActivatedRoute,
+    private cartService : CartService) { }
 
-  ngOnInit(){
-    this._productService.getProducts()
-    .subscribe(
-      res => this.products = res,
-      err => console.log(err)
-    )
+  ngOnInit()
+   {
+     this.route.paramMap.subscribe(() => {
+      this.listAllProducts();
+     })
+    
   }
 
+  listAllProducts() {
+    this.productService.getAllProductList().subscribe((data) => {
+      this.allproducts = data;
+    });
+    this.cartService.search.subscribe((val: any) => {
+      this.searchKey = val;
+    })
+  }
+
+  addtocart(item: any){
+    this.cartService.addtoCart(item);
+  }
+  
 }
+

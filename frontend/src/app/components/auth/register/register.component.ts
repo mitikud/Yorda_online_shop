@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
       form.value.lastName,
       form.value.email,
       form.value.password,
-      form.value.roles
+      form.value.role
     ).subscribe(
       res => {
         console.log(res)

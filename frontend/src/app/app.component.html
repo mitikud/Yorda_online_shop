@@ -4,49 +4,48 @@
       <mat-icon>menu</mat-icon>
     </button>
     <div>
-    <a mat-button routerLink="/" style="font-family: 'Anton', sans-serif">Yorda Online Shopping</a>
+    <a mat-button routerLink="/products" style="font-family: 'Anton', sans-serif">Yorda Online Shopping</a>
     </div>
     <div class="col-md-7 justify-content-start">
       <!-- <a mat-button>Home</a> -->
-      <a mat-button style="font-family: 'Anton', sans-serif" routerLink="/product"> Products </a>
+      <a mat-button style="font-family: 'Anton', sans-serif" routerLink="/products"> Products </a>
       <!-- <a mat-button style="font-family: 'Anton', sans-serif" routerLink="/special"> Member Products </a> -->
 
       <a mat-button style="font-family: 'Anton', sans-serif" routerLink="/contact"> Contact Us <i
         class="fa fa-mail-forward"></i> </a>
+      <a>
+        <form class="form-header"  method="GET"  id="search">
+         
+          <input 
+            [(ngModel)]="_searchSearvice.searchTerm"
+            [ngModelOptions]="{standalone: true}"
+            (keyup)="_searchSearvice.search($event)"
+            class="au-input au-input-xl"
+            type="text"
+            placeholder="Search for products ..."
+          />
+        
+          <button class="au-btn-submit" type="submit">Search</button>
+        
+        </form>
+      </a>
       
-</div>
+      </div>
     
+      
+        
+         
+         
+
+        
 
     <div class="col-md-5 justify-content-end">
       <a mat-button *ngIf="!_authService.loggedIn()" routerLink="/auth/login" routerLinkActive="Active">Sign in</a>
-    <!-- <a mat-button>Logout</a> -->
     <a mat-button *ngIf="!_authService.loggedIn()" routerLink="/auth/register" routerLinkActive="Active">Register</a>
     <a mat-button *ngIf="_authService.loggedIn()" (click)="_authService.logoutUser()">Logout</a>
-    <!-- <a mat-button [matMenuTriggerFor]="managementMenu">Management</a> -->
-    <a mat-button routerLink="/special" routerLinkActive="Active">
+    <a mat-button routerLink="/cart" routerLinkActive="Active">
       <mat-icon>shopping_cart</mat-icon>
       Cart</a>
-
-      <!-- <mat-menu #managementMenu="matMenu">
-        <a mat-menu-item routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
-        <a mat-menu-item routerLink="/admin/management/manage-categories" routerLinkActive="active">Manage-Categories</a>
-        <a mat-menu-item routerLink="/admin/management/manage-users" routerLinkActive="active">Manage-Users</a>
-      </mat-menu> -->
-
-      <!-- <a mat-button style="font-size:23px">
-        <i style="font-size: 23px" class="fas fa-cart-plus" matBadge="Cart"
-          matBadgeOverlap="false"
-          matBadgePosition="above after"
-          matBadgeSize="medium"
-          matBadgeColor="warn">
-        </i>
-      </a> -->
-  
-      <!-- <mat-menu #userMenu="matMenu">
-        <a mat-menu-item routerLink="/profile" routerLinkActive="active">Profile</a>
-        <a mat-menu-item routerLink="/orders" routerLinkActive="active">Orders</a>
-        <a mat-menu-item>Logout</a>
-      </mat-menu> -->
 
     </div>
   </mat-toolbar-row>
@@ -59,6 +58,17 @@
     <mat-sidenav #sidenav mode="side" opened class="example-sidenav justify-content-center text-center"
                  [fixedInViewport]="false"
     >
+    <div class="mt-3">
+      <h2 style="font-family: 'Anton', sans-serif; color:bisque;" class="text-center">
+        Categories
+      </h2>
+      <mat-list class="justify-content-center">
+        <mat-list-item routerLink="/category/1" routerLinkActive="active-link" class="align-self-center nav-item itemCss">Books</mat-list-item>
+      </mat-list>
+      <mat-list class="justify-content-center">
+        <mat-list-item routerLink="/category/2" routerLinkActive="active-link" class="align-self-center nav-item itemCss">Coffee Mugs</mat-list-item>
+      </mat-list>
+    </div>
    
     </mat-sidenav>
 

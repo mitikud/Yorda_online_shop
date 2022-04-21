@@ -9,7 +9,7 @@ import { LoginData } from "../../models/login-data.model";
 @Injectable({ providedIn: 'root' })
 export class AuthService{
   userId: string = '';
-  userType: string = '';
+  role: string = '';
   isAuthenticated = false;
   private tokenTimer: any;
   private tokenData: string = '';
@@ -32,22 +32,52 @@ export class AuthService{
     return this.isAuthenticated;
   }
 
-  createUser(firstName:string, lastName:string, email: string, password: string, roles: string){
+  createUser(firstName:string, lastName:string, email: string, password: string, role: string){
     const authData: AuthData = {
       firstName: firstName,
       lastName: lastName,
       email: email,
       password: password, 
-      roles: roles,
+      role: role,
       
     };
     return this.http.post<any>(this._registerURL, authData)
     
   }
 
-  login(user: any){
-    return this.http.post<any>(this._loginURL, user)
+  login(email: string, password: string){
+    const loginData: LoginData = {email: email, password: password }
+    this.http.post<{
+      token: string,
+      role: string
+    }>(this._loginURL, loginData).subscribe((res) => {
+      const token = res.token;
+      if(token){
+        console.log(res)
+        this.role = res.role;
+
+        this.saveAuthData(token, this.role);
+        if(res.role == "CUSTOMER"){
+          this.router.navigate(['/products'])
+         }
+          if(res.role == "VENDOR"){
+            this.router.navigate(['/product'])
+          }
+          if(res.role == "ADMIN"){
+            this.router.navigate(['/admin'])
+          }
+
+      }
+    })
   }
+
+  private saveAuthData(token: string, role: string){
+    localStorage.setItem('token', token);
+    localStorage.setItem('role', role)
+  }
+  // login(user: any){
+  //   return this.http.post<any>(this._loginURL, user)
+  // }
 
   loggedIn(){
     return !!localStorage.getItem('token')
@@ -55,7 +85,7 @@ export class AuthService{
 
   logoutUser(){
     localStorage.removeItem('token')
-    this.router.navigate(['/product'])
+    this.router.navigate(['/products'])
   }
 
   private setAuthTimer(duration: number){
@@ -133,12 +163,12 @@ export class AuthService{
     this.openSnackBar('Logged out', 'Dismiss')
   }
 
-  private saveAuthData(token: string, expirationDate: Date, userId: string, userType: string){
-    localStorage.setItem('token', token);
-    localStorage.setItem('expiration', expirationDate.toISOString());
-    localStorage.setItem('userId', userId);
-    localStorage.setItem('userType', userType)
-  }
+  // private saveAuthData(token: string, expirationDate: Date, userId: string, userType: string){
+  //   localStorage.setItem('token', token);
+  //   localStorage.setItem('expiration', expirationDate.toISOString());
+  //   localStorage.setItem('userId', userId);
+  //   localStorage.setItem('userType', userType)
+  // }
 
   private clearAuthData(){
     localStorage.removeItem('token');

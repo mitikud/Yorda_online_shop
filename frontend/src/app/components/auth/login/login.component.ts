@@ -10,6 +10,9 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  private tokenData: string = '';
+  role: string = '';
+
   loginUserData : any = {}
   isLoading: boolean = false;  
   constructor(public authService: AuthService, private _router: Router) { }
@@ -19,17 +22,32 @@ export class LoginComponent implements OnInit {
     if(!form.valid){
       return;
     }
-    this.authService.login(this.loginUserData)
-    .subscribe(
-      res => {
-        console.log(res)
-        localStorage.setItem('token',res.token)
-        this._router.navigate(['/special'])
-      },
-      err => console.log(err)
-    )
+    this.authService.login(form.value.email, form.value.password)
 
   }
+  // onLogin(form: NgForm){
+  //   this.isLoading = true;
+  //   if(!form.valid){
+  //     return;
+  //   }
+  //   this.authService.login(this.loginUserData)
+  //   .subscribe(
+  //     res => {
+  //       console.log(res)
+  //       localStorage.setItem('token',res.token)
+  //       if(res.ro)
+  //       this._router.navigate(['/special'])
+  //     },
+  //     err => console.log(err)
+  //   )
+
+  // }
+
+  private saveAuthData(token: string, role: string){
+    localStorage.setItem('token', token);
+    localStorage.setItem('role', role)
+  }
+
   ngOnInit(): void {
   }
 

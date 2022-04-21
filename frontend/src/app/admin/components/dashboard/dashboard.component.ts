@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  profile : any= []
 
-  ngOnInit(): void {
+  constructor (private _adminService: AdminService) { }
+
+  ngOnInit(){
+    this._adminService.getProducts()
+    .subscribe(
+      res => this.profile = res,
+      err => console.log(err)
+    )
   }
 
 }

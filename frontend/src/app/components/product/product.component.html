@@ -1,14 +1,31 @@
-<div class="row mt-5">
-    <div class="col-md-4 mb-3" *ngFor="let product of products">
-      <div class="card text-center">
-        <div class="card-body">
-          <h5 class="card-title">{{product.name}}</h5>
-          <p class="card-text">{{product.description}}</p>
-          <a href="#" class="btn btn-primary">Add to cart</a>
-        </div>
-        <div class="card-footer text-muted">
-          {{product.date | date:'shortDate'}}
+<!-- <div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <div class="row">
+        <div *ngFor="let product of products" class="col-md-3">
+          <div class="product-box">
+            <img src="{{ product.imageUrl }}" class="img-responsive" />
+            <h1>{{ product.name }}</h1>
+            <div class="price">{{ product.unitPrice | currency: "USD" }}</div>
+            <a  class="btn btn-primary btn-sm">Add to cart</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div> -->
+
+<div class="container">
+  <div class="row">
+      <ng-container *ngFor="let item of allproducts | filter:searchKey: 'name'">
+          <div class="card col-md-3">
+              <img src="{{item.imageUrl}}" alt="">
+              <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.name}}</h5>
+              <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{item.description}}</p>
+              <p><strong>Price:</strong> ${{item.unitPrice | currency: "USD"}}</p>
+              <button class="btn btn-primary" (click)=addtocart(item)>Add to cart</button>
+          </div>
+      </ng-container>
+
+  </div>
+</div>

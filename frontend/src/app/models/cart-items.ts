@@ -1,3 +1,5 @@
+
+/*The following code done by Aboneh */
 import { Product } from "./product";
 export class CartItem {
     id: number;

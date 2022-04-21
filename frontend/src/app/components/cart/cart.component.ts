@@ -1,3 +1,5 @@
+/*The following code done by Aboneh and Mitiku*/
+
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 

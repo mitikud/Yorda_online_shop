@@ -1,3 +1,5 @@
+/*The following code done by Aboneh and Mitiku*/
+
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Product } from "src/app/models/product";
@@ -7,8 +9,6 @@ import { SearchService } from "src/app/services/search.service";
 
 @Component({
   selector: "app-product-list",
-  // templateUrl: './product-list.component.html',
-  //templateUrl: "./product-list-table.component.html",
   templateUrl: "./product-list-grid.component.html",
   styleUrls: ["./product-list.component.css"],
 })
@@ -28,11 +28,7 @@ export class ProductListComponent implements OnInit {
     
   }
 
-  // listProducts() {
-  //   this.productService.getProductList().subscribe((data) => {
-  //     this.products = data;
-  //   });
-  // }
+  
   listProducts() {
     const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
 

@@ -1,3 +1,5 @@
+/*The following code done by Mitiku */
+
 export class Product {
     sku!: string;
     name!: string;

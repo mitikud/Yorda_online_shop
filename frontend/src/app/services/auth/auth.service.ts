@@ -60,10 +60,10 @@ export class AuthService{
         if(res.role == "CUSTOMER"){
           this.router.navigate(['/products'])
          }
-          if(res.role == "VENDOR"){
+        if(res.role == "VENDOR"){
             this.router.navigate(['/product'])
           }
-          if(res.role == "ADMIN"){
+        if(res.role == "ADMIN"){
             this.router.navigate(['/admin'])
           }
 
@@ -75,9 +75,6 @@ export class AuthService{
     localStorage.setItem('token', token);
     localStorage.setItem('role', role)
   }
-  // login(user: any){
-  //   return this.http.post<any>(this._loginURL, user)
-  // }
 
   loggedIn(){
     return !!localStorage.getItem('token')
